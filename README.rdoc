@@ -1,28 +1,29 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+アカウントの追加情報に自分の位置情報が入るようにしたい
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+
+curl -H "Content-Type: application/json" -d '{"user":{"email":"test@test.com","password":"12345678"}}' -X POST http://0.0.0.0:3000/users/
+
+
+
+このような形でアカウントを作成出来、
+
+authentication_tokenが返ってきてから
+
+下記のcurlでユーザーに位置情報を追加したいのですが
+
+
+
+curl -i -H "Accept: application/json" -H "Content-type: application/json" -H "X-User-Email: test@test.com" -H "X-User-Token: 9G7xQdoAQqGP4V1vCdEA" -X POST -d '{"user": {"my_latitude":"32.32323232", "my_longitude": "32.32323232" } }' http://0.0.0.0:3000/users/
+
+
+
+で通るものの
+
+rails cからUser.allと見た時にmy_latitudeとmy_longitudeの値が変更されていない状態。。
+
+
+
+authentication_tokenでユーザー管理し情報を変更する際はどのようにすれば良いのかわからぬ...
