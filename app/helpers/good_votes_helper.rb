@@ -1,0 +1,2 @@
+module GoodVotesHelper
+end

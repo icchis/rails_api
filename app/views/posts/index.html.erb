@@ -1,0 +1,27 @@
+<h1>Now posts</h1>
+
+<%= link_to 'New Post', new_post_path %>
+
+<br>
+
+<div>
+  <% @posts.each do |post| %>
+    <h3>投稿： <%= post.content %></h3>
+    <%= post.created_at.present? ? post.created_at.strftime("%Y/%m月/%d日(#{%w(日 月 火 水 木 金 土 日)[Time.now.wday]}) %T ") : post.created_at %>
+    <%= post.good %>Good
+    <%= post.bad %>Bad
+    <%= link_to "GOOD", good_post_path(post), method: "post" %>
+    <%= link_to "BAD", bad_post_path(post), method: "post" %>
+
+    <p>コメント</p>
+    <ul><% post.comments.each do |comment| %>
+      <li>
+        <%= simple_format(comment.body) %>
+        <%= comment.created_at.present? ? comment.created_at.strftime("%Y/%m月/%d日(#{%w(日 月 火 水 木 金 土 日)[Time.now.wday]}) %T ") : comment.created_at %>
+        </li>
+      <% end %>
+    </ul>
+    <p><%= link_to 'Show', post %> | <%= link_to 'Edit', edit_post_path(post) %> | <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+</div>
+<hr>
+  <% end %>
